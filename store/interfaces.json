@@ -1,0 +1,6 @@
+{
+  "rebate-chat": {
+    "component": "RebateChat",
+    "composition": "children"
+  }
+}
