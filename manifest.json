@@ -1,7 +1,7 @@
 {
   "vendor": "eriksbikeshop",
   "name": "rebate-chat",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "title": "rebate-chat",
   "description": "rebate-chat component",
   "builders": {
