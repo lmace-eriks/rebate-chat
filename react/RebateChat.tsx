@@ -18,13 +18,12 @@ const sectionStyles: React.CSSProperties = {
 const mitelChatId = "iframemaindiv";
 
 const RebateChat = ({ }: RebateChatProps) => {
-  if (!canUseDOM) return <>No DOM</>;
+  if (!canUseDOM) return <></>;
 
   const bodyElement = document.querySelector("body.bg-base") as HTMLBodyElement | Node;
-  if (!bodyElement) return <>No Body</>
+  if (!bodyElement) return <></>
 
   const targetElement = useRef<HTMLBodyElement | Node>(bodyElement);
-  const removeCount = useRef<number>(0);
   const defaultFlag = useRef(false);
 
   const config = { attributes: false, childList: true, subtree: false };
@@ -43,24 +42,20 @@ const RebateChat = ({ }: RebateChatProps) => {
         addedNode.remove();
         defaultFlag.current = true;
 
-        removeCount.current = removeCount.current + 1;
-        console.info(removeCount.current);
-        console.info({ addedNode });
-
         createRebateChatWindow();
       }
     }
   }
 
   const createRebateChatWindow = () => {
-    console.info("Create Chat")
+    // Code from Mitel
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = "https://webchat.mitel.io/bootstrapper.js?accountid%3DYjZmMzgzOGYtMjRkZS00NGFhLWI3YTgtYzRiOTlmOWNiZDUw%26chatname%3DTU4gRWJpa2UgUmViYXRlIEludGVybmFs";
     document.head.appendChild(script);
   }
 
-  // Create / Destroy Intersection Observer
+  // Create / Destroy Mutation Observer
   useEffect(() => {
     const observer = new MutationObserver(callBack);
     observer.observe(targetElement.current, config);
@@ -76,7 +71,7 @@ const RebateChat = ({ }: RebateChatProps) => {
       #cloudlink-chat-overlay-iframe { position: static !important; min-width: 25rem; width: 50% !important; height: 90% !important;}
       `}</style>
       <div style={sectionStyles}>
-        Mitel Chat - E-Bike Rebate Widget
+        E-Bike Rebate Widget
       </div>
     </>
   )
