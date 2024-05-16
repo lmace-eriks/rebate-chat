@@ -1,8 +1,5 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { canUseDOM } from "vtex.render-runtime";
-// import { Link, canUseDOM, useRuntime } from "vtex.render-runtime";
-
-// import { default as s } from "./styles.css";
 
 type RebateChatProps = {
 
@@ -22,6 +19,8 @@ const RebateChat = ({ }: RebateChatProps) => {
 
   const bodyElement = document.querySelector("body.bg-base") as HTMLBodyElement | Node;
   if (!bodyElement) return <></>
+
+  const [loading, setLoading] = useState(true);
 
   const targetElement = useRef<HTMLBodyElement | Node>(bodyElement);
   const defaultFlag = useRef(false);
@@ -53,6 +52,7 @@ const RebateChat = ({ }: RebateChatProps) => {
     script.type = 'text/javascript';
     script.src = "https://webchat.mitel.io/bootstrapper.js?accountid%3DYjZmMzgzOGYtMjRkZS00NGFhLWI3YTgtYzRiOTlmOWNiZDUw%26chatname%3DTU4gRWJpa2UgUmViYXRlIEludGVybmFs";
     document.head.appendChild(script);
+    setLoading(false);
   }
 
   // Create / Destroy Mutation Observer
@@ -71,7 +71,7 @@ const RebateChat = ({ }: RebateChatProps) => {
       #cloudlink-chat-overlay-iframe { position: static !important; min-width: 25rem; width: 50% !important; height: 90% !important;}
       `}</style>
       <div style={sectionStyles}>
-        E-Bike Rebate Widget
+        {loading ? "Loading Widget..." : "E-Bike Rebate Widget"}
       </div>
     </>
   )
